@@ -24,17 +24,18 @@ import pandas as pd
 import os
 
 from tkinter import *
+## Import All the above Modules ##
 master = Tk()
 master.title('COMMAND BOT')
 master.geometry('300x200')
 Label(master,text='COMMAND BOT , SELECT FEATURES :',font=30).grid(row=0,column=1)
-Label(master,text='Please close this window to start',font=30).grid(row=4,column=1)
+Label(master,text='Please close this window to start',font=30).grid(row=4,column=1)  #please close that window to proceed further.
 follower_choice=7
 like_choice= 2
 comment_choice=8
 
-user_username = "9gag_st"
-user_password = "05012020"
+user_username = input("USERNAME : ")
+user_password = input("PASSWORD : ")
 
 print(f'****************************************        Account User : {user_username}        ******************************')
 def followers():
@@ -78,12 +79,13 @@ mainloop()
 user_list = pd.read_csv('last_users_followed_list.csv')
 user_list = list(user_list['Accounts'])
 
-webdriver = webdriver.Chrome("chromedriver.exe")
+webdriver = webdriver.Chrome("chromedriver.exe")  #Update the Chrome Browser and download its compatible Chrome Driver version. 
+#Chrome Version Used here : Version 84.0.4147.89 (Official Build) (64-bit)
 sleep(2)
 webdriver.get('https://www.instagram.com')
 sleep(3)
 
-
+# You can change comments as per your choice of promotion.
 comment_1 = 'hahah, Amazing POST, dUDE can u CHECK OUT MY PAGE TOO,and drop a follow if u like it:)'
 comment_2 = 'This post real? Lol i laughed hard after seeing this thing, can u check my pg and drop a follow?:0'
 comment_3 = 'Dang , From where do u get these memes?----Can u check out my page too and drop a follow if u like it--:)'
@@ -103,12 +105,12 @@ except:
 notnow = webdriver.find_element_by_css_selector("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm")
 notnow.click()  # comment these last 2 lines out, if you don't get a pop up asking about notifications
 
-hashtag_list = ['memes', 'animememes', 'memepage', 'dankmemes', 'weebmemes', 'memesfordays']
+hashtag_list = ['memes', 'animememes', 'memepage', 'dankmemes', 'weebmemes', 'memesfordays'] ##Enter the most popular hashtags in your Niche.
 # hashtag_list = ['dogs' , 'cats' , 'elephant' , 'doggo' , 'kitty']
 
 
 prev_user_list = []
-# prev_user_list = pd.read_csv('last_users_followed_list.csv', delimiter=',').iloc[:,1:2]  # useful to build a user log
+prev_user_list = pd.read_csv('last_users_followed_list.csv', delimiter=',').iloc[:,1:2]  # useful to build a user log
 # prev_user_list = list(prev_user_list['0'])
 
 new_followed = []
@@ -124,8 +126,10 @@ cycle = 0
 follower_increment = 0
 webdriver.get(f'http://www.instagram.com/9gag_st')
 sleep(5)
+stringe = '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span' #If needed please change these stringes in all over code as per new updates of chrome version
+                                                                              #or any other ERRORS. #To change Stringe A detailed guide is given in ReadMe File.
 follower_count = webdriver.find_element_by_xpath(
-     '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span').text
+    stringe).text
 follower_count = int(follower_count.replace(',', ''))
 initial_follower = follower_count
 following_count = webdriver.find_element_by_xpath(
@@ -136,298 +140,6 @@ print(f"Initial Followers = {follower_count}-----------------Initial Following =
 while (cycle < 100):
         pop_clone = 3
         term = randint(-3, 0)
-        # term = 1  # follow - unfollow quicker (time - Approx 4 mins)
-        if term > 0:
-            webdriver.get("https://www.instagram.com/watchtopzzvideo")
-            sleep(3)
-
-            following_button = webdriver.find_element_by_xpath("//a[contains(@href,'following')]")
-            following_button.click()
-            sleep(randint(5, 8))
-            following_number = webdriver.find_element_by_xpath(
-                "//*[@id='react-root']/section/main/div/header/section/ul/li[3]/a/span").text
-            tab_window = webdriver.find_element_by_xpath("//div[@class='isgrP']")
-            scroll = 0
-            joker = 1
-            trial_follow = 1
-            trial_following = 1
-            sleep(randint(5, 9))
-
-            if webdriver.find_element_by_xpath(
-                    '/html/body/div[4]/div/div[2]/ul/div/li[1]/div/div[3]/button').text == 'Following':
-                print('Time to unFollow')
-                if trial_following > 0:
-                    if joker > 0:
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[1]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[1]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[2]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[2]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[3]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[3]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[4]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[4]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[5]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[5]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[6]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[6]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[7]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[7]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 4))
-                    while scroll < 1:
-                        webdriver.execute_script(
-                            'arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;',
-                            tab_window)
-
-                        # tab_window.send_keys(Keys.PAGE_DOWN)
-                        print('okay')
-
-                        scroll += 1
-                        sleep(0.2)
-                    roker = 1
-                    if roker > 0:
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[8]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[8]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 7))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[9]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[9]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 6))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[10]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[10]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(3, 9))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[11]/div/div[3]/button').text == 'Following':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[11]/div/div[3]/button").click()
-                            sleep(0.5)
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[5]/div/div/div[3]/button[1]").click()
-                            print("unfollowed")
-                        sleep(randint(2, 7))
-                        webdriver.get('http://www.instagram.com/watchtopzzvideo')
-                        sleep(randint(3, 6))
-
-                        end = time.time()
-                        elapsed_time = end - start
-                        yummy = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
-                        print(yummy)
-                        following_button = webdriver.find_element_by_xpath("//a[contains(@href,'following')]")
-                        following_button.click()
-                        sleep(5)
-            if webdriver.find_element_by_xpath(
-                    '/html/body/div[4]/div/div[2]/ul/div/li[1]/div/div[3]/button').text == 'Follow':
-                if trial_follow > 0:
-                    if joker > 0:
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[1]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[1]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[2]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[2]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                        sleep(randint(2, 9))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[3]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[3]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[4]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[4]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 5))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[5]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[5]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[6]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[6]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 5))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[7]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[7]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 4))
-                    while scroll < 1:
-                        webdriver.execute_script(
-                            'arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;',
-                            tab_window)
-
-                        # tab_window.send_keys(Keys.PAGE_DOWN)
-                        print('okay')
-
-                        scroll += 1
-                        sleep(0.2)
-                    roker = 1
-                    if roker > 0:
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[8]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[8]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[9]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[9]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 4))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[10]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[10]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(6, 12))
-
-                        if webdriver.find_element_by_xpath(
-                                '/html/body/div[4]/div/div[2]/ul/div/li[11]/div/div[3]/button').text == 'Follow':
-                            webdriver.find_element_by_xpath(
-                                "/html/body/div[4]/div/div[2]/ul/div/li[11]/div/div[3]/button").click()
-                            sleep(0.5)
-
-                            print("followed")
-                        sleep(randint(2, 4))
-                        webdriver.get('http://www.instagram.com/watchtopzzvideo')
-                        sleep(4)
-                        following_button = webdriver.find_element_by_xpath("//a[contains(@href,'following')]")
-                        following_button.click()
-                        sleep(randint(15, 25))
-                        webdriver.refresh()
-                        sleep(randint(4, 10))
-                        end = time.time()
-                        elapsed_time = end - start
-                        yummy = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
-                        sleep(randint(15, 40))
-                        webdriver.get(f'https://www.instagram.com/{user_username}')
-                        sleep(5)
-                        follower_count_1 = int(
-                            webdriver.find_element_by_xpath(
-                                '/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span').text.replace(',',
-                                                                                                                  ''))
-                        print(
-                            f'''{yummy} : IF {int(initial_follower)}------------------ >CF {int(follower_count_1)}--------------
-                ---------------------------  + {int(follower_count_1)-int(initial_follower)}  -------------------''')
-                        follower_increment = int(follower_count_1) - int(initial_follower)
-
-                        # os.remove(f'{user_username}_runtimegrowth.csv')
-                        # new_followers = new_followers.append(follower_increment)
-                        # new_followers = pd.DataFrame(new_followers)
-                        # new_followers.to_csv(f'{user_username}_runtimegrowth.csv')
-                        sleep(randint(20, 35))
-        # like - comment - follow (time - Approx 30 mins)
         if term < 0:
             print('Time To Explore....Approx Time 30 mins')
             for hashtag in hashtag_list:
